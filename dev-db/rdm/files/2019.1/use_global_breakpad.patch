@@ -1,0 +1,73 @@
+diff --git a/3rdparty/3rdparty.pri b/3rdparty/3rdparty.pri
+index d3c18a6d..bf80e007 100644
+--- a/3rdparty/3rdparty.pri
++++ b/3rdparty/3rdparty.pri
+@@ -23,13 +23,6 @@ if(win32*):exists( $$PWD/qredisclient/qredisclient.lib ) {
+     include($$PWD/qredisclient/qredisclient.pri)
+ }
+ 
+-# Google breakpad
+-BREAKPADDIR = $$PWD/gbreakpad/src
+-DEPENDPATH += $$BREAKPADDIR
+-
+-INCLUDEPATH += $$BREAKPADDIR/
+-INCLUDEPATH += $$BREAKPADDIR/src
+-
+ #breakpad app need debug info inside binaries
+ win32-msvc* {
+     QMAKE_CXXFLAGS += /MP
+@@ -48,19 +41,6 @@ win32* {
+     } else {
+         INCLUDEPATH += $$PWD/qredisclient/3rdparty/windows/rmt_zlib.1.2.8.5/build/native/include
+     }
+-
+-    HEADERS += $$BREAKPADDIR/common/windows/string_utils-inl.h
+-    HEADERS += $$BREAKPADDIR/common/windows/guid_string.h
+-    HEADERS += $$BREAKPADDIR/client/windows/handler/exception_handler.h
+-    HEADERS += $$BREAKPADDIR/client/windows/common/ipc_protocol.h
+-    HEADERS += $$BREAKPADDIR/google_breakpad/common/minidump_format.h
+-    HEADERS += $$BREAKPADDIR/google_breakpad/common/breakpad_types.h
+-    HEADERS += $$BREAKPADDIR/client/windows/crash_generation/crash_generation_client.h
+-    HEADERS += $$BREAKPADDIR/common/scoped_ptr.h
+-    SOURCES += $$BREAKPADDIR/client/windows/handler/exception_handler.cc
+-    SOURCES += $$BREAKPADDIR/common/windows/string_utils.cc
+-    SOURCES += $$BREAKPADDIR/common/windows/guid_string.cc
+-    SOURCES += $$BREAKPADDIR/client/windows/crash_generation/crash_generation_client.cc
+ }
+ 
+ unix:macx { # OSX
+@@ -88,7 +68,7 @@ unix:!macx { # ubuntu & debian
+         #QMAKE_LFLAGS = -Wl,-rpath=/home/user/Qt5.9.3/5.9.3/gcc_64/lib
+     }
+ 
+-    LIBS += $$BREAKPADDIR/client/linux/libbreakpad_client.a
++    LIBS += /usr/lib64/libbreakpad_client.a
+ 
+     # Unix signal watcher
+     defined(LINUX_SIGNALS, var) {
+diff --git a/src/modules/crashhandler/crashhandler.cpp b/src/modules/crashhandler/crashhandler.cpp
+index 818dac2d..c03d1dc2 100644
+--- a/src/modules/crashhandler/crashhandler.cpp
++++ b/src/modules/crashhandler/crashhandler.cpp
+@@ -7,7 +7,7 @@
+ #include <QFileInfo>
+ 
+ #if defined(Q_OS_LINUX)
+-#include "client/linux/handler/exception_handler.h"
++#include <breakpad/client/linux/handler/exception_handler.h>
+ #elif defined(Q_OS_WIN32)
+ #include "client/windows/handler/exception_handler.h"
+ #elif defined(Q_OS_MAC)
+diff --git a/src/rdm.pro b/src/rdm.pro
+index 08509671..dd1589db 100644
+--- a/src/rdm.pro
++++ b/src/rdm.pro
+@@ -60,6 +60,8 @@ THIRDPARTYDIR = $$PWD/../3rdparty/
+ 
+ include($$THIRDPARTYDIR/3rdparty.pri)
+ 
++INCLUDEPATH += /usr/include/breakpad
++
+ win32 {
+     CONFIG += c++11
+ 
