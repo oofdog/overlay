@@ -17,7 +17,6 @@ EGIT_COMMIT="${PV}"
 
 ECONF_SOURCE="src"
 
-        #dev-qt/qredisclient
 RDEPEND="
         dev-qt/qtconcurrent:5
         dev-qt/qtcore:5
@@ -30,14 +29,11 @@ RDEPEND="
         dev-qt/qtquickcontrols2:5
         dev-qt/qtwidgets:5
         dev-qt/qtxml:5
-        dev-util/google-breakpad
         sys-libs/zlib
         X? ( x11-libs/libX11 x11-libs/libXScrnSaver )"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-  eapply -p1 --binary "${FILESDIR}/2019.1/use_global_breakpad.patch"
-  eapply -p1 --binary "${FILESDIR}/2019.1/version_fix.patch"
   eapply_user
 }
 
@@ -59,8 +55,6 @@ src_install() {
   chmod 0755 "${D}/opt/redis-desktop-manager/rdm.sh"
 
   mv "${D}/opt/redis-desktop-manager/qt.conf" "${D}/opt/redis-desktop-manager/qt.conf.backup"
-
-  #make_desktop_entry
 }
 
 pkg_postinst() {
