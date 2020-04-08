@@ -21,7 +21,7 @@ RDEPEND="
         dev-qt/qtconcurrent:5
         dev-qt/qtcore:5
         dev-qt/qtcharts:5
-        dev-qt/qtgui:5[gif,jpeg,png,xcb]
+        dev-qt/qtgui:5[gif,jpeg,png]
         dev-qt/qtnetwork:5
         dev-qt/qtopengl:5
         dev-qt/qtsql:5
