@@ -9,7 +9,7 @@ HOMEPAGE="https://github.com/uglide/RedisDesktopManager"
 DESCRIPTION="Redis Desktop Manager"
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="X"
 
 EGIT_REPO_URI="https://github.com/uglide/RedisDesktopManager.git"
