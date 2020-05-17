@@ -18,17 +18,18 @@ EGIT_COMMIT="${PV}"
 ECONF_SOURCE="src"
 
 RDEPEND="
-        dev-qt/qtconcurrent:5
-        dev-qt/qtcore:5
-        dev-qt/qtcharts:5
-        dev-qt/qtgui:5[gif,jpeg,png]
-        dev-qt/qtnetwork:5
-        dev-qt/qtopengl:5
-        dev-qt/qtsql:5
-        dev-qt/qtsvg:5
-        dev-qt/qtquickcontrols2:5
-        dev-qt/qtwidgets:5
-        dev-qt/qtxml:5
+        dev-qt/qtconcurrent:5=
+        dev-qt/qtcore:5=
+        dev-qt/qtcharts:5=
+        dev-qt/qtgui:5=[gif,jpeg,png]
+        dev-qt/qtnetwork:5=
+        dev-qt/qtopengl:5=
+        dev-qt/qtsql:5=
+        dev-qt/qtsvg:5=
+        dev-qt/qtquickcontrols2:5=
+		dev-qt/qtquickcontrols:5=
+        dev-qt/qtwidgets:5=
+        dev-qt/qtxml:5=
         sys-libs/zlib
         X? ( x11-libs/libX11 x11-libs/libXScrnSaver )"
 DEPEND="${RDEPEND}"
